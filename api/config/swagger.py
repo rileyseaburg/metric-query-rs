@@ -28,6 +28,10 @@ def get_swagger_template():
             - Metrics are delivered as a bounded stream (part of a larger unbounded stream)
             - Metrics aren't guaranteed to be in order and can't be pre-sorted
             - Transformations are applied sequentially in the order provided
+            
+            ## Documentation
+            For comprehensive documentation, visit our [Sphinx Documentation](/sphinx-docs/) which provides detailed
+            information on installation, usage, and the complete API reference.
             """,
             "version": "1.0.0",
             "contact": {
@@ -237,7 +241,19 @@ def get_swagger_template():
             }
         },
         "externalDocs": {
-            "description": "Metric Query Interface Design Documentation",
-            "url": "https://github.com/rileyseaburg/metric-query-rs/api/docs"
-        }
+            "description": "Metric Query Interface Documentation",
+            "url": "/sphinx-docs/"
+        },
+        "x-additional-documentation": [
+            {
+                "name": "Sphinx Documentation",
+                "description": "Comprehensive Sphinx documentation for the Metric Query Library",
+                "url": "/sphinx-docs/"
+            },
+            {
+                "name": "GitHub Repository",
+                "description": "Source code and design documentation",
+                "url": "https://github.com/rileyseaburg/metric-query-rs"
+            }
+        ]
     }

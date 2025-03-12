@@ -1,10 +1,11 @@
 """
 Documentation routes for the Metric Query API.
 """
-from flask import jsonify, Blueprint
+from flask import jsonify, Blueprint, send_from_directory, current_app
+import os
 
 # Create a Blueprint for the documentation routes
-docs_bp = Blueprint('docs', __name__)
+docs_bp = Blueprint('docs', __name__, static_folder='docs/_build/html')
 
 @docs_bp.route('/', methods=['GET'])
 def api_info():
@@ -746,3 +747,34 @@ def api_info():
             }
         }
     })
+
+@docs_bp.route('/sphinx-docs/')
+@docs_bp.route('/sphinx-docs/<path:path>')
+def sphinx_docs(path='index.html'):
+    """
+    Serve Sphinx documentation
+    ---
+    tags:
+      - Documentation
+    description: |
+      Sphinx-generated documentation for the Metric Query Library.
+      
+      This documentation provides comprehensive information on installing, using,
+      and extending the Metric Query Library.
+    produces:
+      - text/html
+    parameters:
+      - name: path
+        in: path
+        type: string
+        required: false
+        default: index.html
+        description: Path to the documentation file
+    responses:
+      200:
+        description: HTML documentation
+      404:
+        description: Documentation file not found
+    """
+    docs_dir = os.path.join(current_app.root_path, '..', 'docs', '_build', 'html')
+    return send_from_directory(docs_dir, path)

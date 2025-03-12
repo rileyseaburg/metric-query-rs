@@ -53,7 +53,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               <a href="https://github.com/rileyseaburg/metric-query-rs" className="hover:text-gray-900">
                 GitHub Repository
               </a>
-              <a href="/docs" className="hover:text-gray-900">
+              <a href="/api/sphinx-docs/" className="hover:text-gray-900">
                 Documentation
               </a>
             </div>

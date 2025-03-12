@@ -39,9 +39,16 @@ COPY --from=build /build/target/wheels/*.whl /tmp/
 # Copy Python API code
 COPY api/ /app/
 
+# Copy Sphinx documentation files
+COPY docs/ /app/docs/
+
 # Install dependencies and the built wheel
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir /tmp/*.whl
+
+# Install Sphinx and build documentation
+RUN pip install --no-cache-dir -r docs/requirements.txt
+RUN cd docs && sphinx-build -b html . _build/html
 
 # Expose API port
 EXPOSE 5000

@@ -264,4 +264,6 @@ For more details about the API endpoints, see the Swagger documentation availabl
 ## Additional Documentation
 
 - [Integrated Label Handling](api/docs/integrated-label-handling.md) - Learn about the new label-aware transformation capabilities
+- [Sphinx Documentation](/sphinx-docs/) - Comprehensive documentation for the Metric Query Library
 - Production API Swagger: https://api-metrics-demandbase.rileyseaburg.com/apidocs/
+- Production Sphinx Documentation: https://api-metrics-demandbase.rileyseaburg.com/sphinx-docs/
