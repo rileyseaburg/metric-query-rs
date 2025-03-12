@@ -4,14 +4,18 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Copy package files and install dependencies first (better layer caching)
-COPY package*.json ./
-COPY tsconfig.json ./
-COPY next.config.ts ./
-COPY postcss.config.mjs ./
+# When building from the root directory, we need to specify the ui/ prefix
+COPY ui/package*.json ./
+COPY ui/tsconfig.json ./
+COPY ui/next.config.ts ./
+COPY ui/postcss.config.mjs ./
 RUN npm ci
 
 # Copy only the necessary application code
-COPY . .
+COPY ui/public ./public
+COPY ui/src ./src
+COPY ui/.gitignore ./
+COPY ui/eslint.config.mjs ./
 
 # Build the Next.js application
 RUN npm run build
@@ -23,7 +27,7 @@ WORKDIR /app
 # Set environment variables
 ENV NODE_ENV=production
 ENV DOCKER_ENV=true
-ENV NODE_ENV=production
+ENV NEXT_PUBLIC_API_URL=https://api-metrics-demandbase.rileyseaburg.com
 
 # Copy built assets from the builder stage
 COPY --from=builder /app/package*.json ./
