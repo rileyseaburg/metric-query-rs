@@ -1,98 +1,173 @@
 # Integrated Label Handling
 
-This document describes the integrated label handling approach implemented in the Metric Query Library. This enhancement allows for more flexible and powerful label-based transformations within the unified metric transformation pipeline.
+This document describes the integrated label handling feature in the Metric Query library, which allows for more efficient and intuitive filtering and transformation of labeled metrics.
 
 ## Overview
 
-Previously, the Metric Query Library handled labeled metrics through a separate pre-processing step using the `LabeledMetricProcessor` class. This required converting labeled metrics to unlabeled metrics before they could be processed by the core Rust transformation engine, limiting the flexibility of label-based operations.
+The Metric Query library now supports direct handling of labeled metrics through the core `MetricPipeline` interface. This means you can filter metrics by their labels and then apply additional transformations in a seamless, unified API.
 
-The new integrated approach allows label information to flow directly through the Rust pipeline, enabling more complex transformations that can make decisions based on labels within a single unified pipeline.
+### Key Benefits
 
-## Key Improvements
+- **Simplified API**: No separate processor needed for label operations
+- **Consistent interface**: Use the same pipeline API for both labeled and unlabeled metrics
+- **Improved performance**: Reduced overhead by eliminating conversion steps
+- **Better type safety**: More explicit parameter types for label operations
 
-- **Unified Metric Model**: The `Metric` struct in Rust now includes an optional `label` field, eliminating the need for separate `LabeledMetric` handling.
-- **Label-Aware Transformations**: The transformation pipeline now preserves label information throughout the process.
-- **Direct Label Filtering**: Label filtering can now be done directly within the transformation pipeline rather than as a preprocessing step.
-- **Preserve Labels in Results**: Output metrics maintain their label information, providing richer context in the results.
+## API Reference
 
-## Using Label-Based Filtering
+### Label Filter Operations
 
-The enhanced API provides two main methods for filtering by label:
+The following operations are available for filtering metrics by label:
 
-### 1. Filter by Exact Label Match
+#### 1. `filter_by_label(filter_type, label)`
+
+Filter metrics to only include those with an exact label match.
+
+- **Parameters**:
+  - `filter_type`: The string `"label_eq"` (literal equality)
+  - `label`: String value to match against metric labels
+
+- **Example**:
+  ```python
+  pipeline.filter_by_label('label_eq', 'cpu_usage')
+  ```
+
+#### 2. `filter_by_labels(filter_type, labels)`
+
+Filter metrics to include those with labels matching any in the provided set.
+
+- **Parameters**:
+  - `filter_type`: The string `"label_in"` (set membership)
+  - `labels`: List of string values to match against metric labels
+
+- **Example**:
+  ```python
+  pipeline.filter_by_labels('label_in', ['cpu_usage', 'memory_usage'])
+  ```
+
+## Usage Patterns
+
+### Basic Label Filtering
 
 ```python
-# Filter metrics with label "cpu_usage"
-pipeline = MetricTransformationPipeline(metrics)
+from metric_query_library import create_pipeline
+
+# Create a pipeline with labeled metrics
+pipeline = create_pipeline(labeled_metrics)
+
+# Filter to only CPU usage metrics
+result = pipeline.filter_by_label('label_eq', 'cpu_usage').execute()
+```
+
+### Combining Label and Value Filters
+
+```python
+# Filter to CPU metrics with values over 80%
 result = (
     pipeline
-    .filter_by_label("cpu_usage")
-    .aggregate("avg")
+    .filter_by_label('label_eq', 'cpu_usage')
+    .greater_than(80)
     .execute()
 )
 ```
 
-### 2. Filter by Multiple Labels
+### Filtering by Multiple Labels
 
 ```python
-# Filter metrics with labels in the set ["cpu_usage", "memory_usage"]
-pipeline = MetricTransformationPipeline(metrics)
+# Get both CPU and memory metrics
 result = (
     pipeline
-    .filter_by_labels(["cpu_usage", "memory_usage"])
-    .group_by_hour("sum")
+    .filter_by_labels('label_in', ['cpu_usage', 'memory_usage'])
     .execute()
 )
 ```
 
-## How It Works
-
-1. When metrics are added to the pipeline, label information is preserved within the `Metric` struct.
-2. Label filters (`label_eq` and `label_in`) are implemented as regular filter plugins in the Rust core.
-3. The `FilterTransformation` applies these label filters in the same way as value filters.
-4. Aggregation and time grouping operations maintain label information where appropriate.
-
-## Integration with Existing Code
-
-This enhancement is fully backward compatible:
-- Existing code using unlabeled metrics will continue to work without changes.
-- The `LabeledMetricProcessor` is maintained for backward compatibility but is no longer necessary for most use cases.
-- All existing transformations work with both labeled and unlabeled metrics.
-
-## Performance Considerations
-
-The integrated label handling approach offers several performance benefits:
-- Eliminates the need to convert between `LabeledMetric` and `Metric` objects.
-- Avoids creating multiple separate pipelines for different labels.
-- Reduces memory usage by operating on a single pipeline instead of multiple pipelines.
-
-## Example: Complex Label-Aware Pipeline
+### Complete Analysis Example
 
 ```python
-# Create a pipeline that filters different labels with different thresholds
-pipeline = MetricTransformationPipeline(metrics)
-
-# For CPU metrics, filter values > 80
-cpu_pipeline = pipeline.clone().filter_by_label("cpu_usage").greater_than(80)
-
-# For memory metrics, filter values > 90
-mem_pipeline = pipeline.clone().filter_by_label("memory_usage").greater_than(90)
-
-# Combine the results and aggregate
-combined_metrics = cpu_pipeline.execute() + mem_pipeline.execute()
-final_pipeline = MetricTransformationPipeline(combined_metrics).average()
-result = final_pipeline.execute()
-```
-
-With future enhancements, we could potentially support this pattern with a single pipeline:
-
-```python
-# Hypothetical future API for label-specific conditions
-pipeline = MetricTransformationPipeline(metrics)
+# Find average hourly CPU usage over 50%
 result = (
     pipeline
-    .when_label("cpu_usage").greater_than(80)
-    .when_label("memory_usage").greater_than(90)
-    .average()
-    .execute()
+    .filter_by_label('label_eq', 'cpu_usage')
+    .greater_than(50)
+    .group_by_hour('avg')
+    .execute_to_dicts()
 )
+```
+
+## REST API Changes
+
+The labeled metrics API endpoints have been updated to use the integrated label handling:
+
+### POST /labeled-metrics/transform
+
+This endpoint now accepts a unified transformation structure that includes label filter operations directly:
+
+```json
+{
+  "transformations": [
+    {
+      "label_filter": "cpu_usage"
+    },
+    {
+      "filter": {
+        "type": "gt", 
+        "value": 50
+      }
+    },
+    {
+      "aggregation": "avg",
+      "time_grouping": "hour"
+    }
+  ]
+}
+```
+
+For filtering by multiple labels:
+
+```json
+{
+  "transformations": [
+    {
+      "label_filter": ["cpu_usage", "memory_usage"]
+    },
+    ...
+  ]
+}
+```
+
+### POST /labeled-metrics/pipeline
+
+This endpoint now accepts operations for label filtering directly in the pipeline:
+
+```json
+{
+  "pipeline": [
+    {"operation": "filter_by_label", "label": "cpu_usage"},
+    {"operation": "greater_than", "value": 50},
+    {"operation": "group_by_hour", "aggregation": "avg"}
+  ]
+}
+```
+
+For filtering by multiple labels:
+
+```json
+{
+  "pipeline": [
+    {"operation": "filter_by_labels", "labels": ["cpu_usage", "memory_usage"]},
+    ...
+  ]
+}
+```
+
+## Implementation Details
+
+The integrated label handling is implemented by:
+
+1. Adding label filter capabilities directly to the `MetricPipeline` class
+2. Modifying the Rust pipeline to handle label filtering natively
+3. Supporting type-safe parameters through the `label_eq` and `label_in` type strings
+4. Optimizing the filtering process to handle labels efficiently
+
+This removes the need for the separate processor step previously required for label operations.

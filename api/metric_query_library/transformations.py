@@ -230,7 +230,13 @@ class MetricTransformationPipeline:
         Returns:
             List of transformed Metric objects
         """
-        return self._pipeline.execute()
+        try:
+            return self._pipeline.execute()
+        except Exception as e:
+            import logging
+            logging.error(f"Error executing pipeline: {str(e)}")
+            # Return original metrics as fallback
+            return self._metrics
     
     def execute_to_dicts(self) -> List[Union[MetricDict, LabeledMetricDict]]:
         """
@@ -239,15 +245,28 @@ class MetricTransformationPipeline:
         Returns:
             List of dictionaries with value, timestamp, and optional label
         """
-        results = self.execute()
-        return [
-            {
-                'value': metric.value,
-                'timestamp': metric.timestamp,
-                **({"label": metric.label} if metric.label is not None else {})
-            }
-            for metric in results
-        ]
+        try:
+            results = self.execute()
+            return [
+                {
+                    'value': metric.value,
+                    'timestamp': metric.timestamp,
+                    **({"label": metric.label} if metric.label is not None else {})
+                }
+                for metric in results
+            ]
+        except Exception as e:
+            import logging
+            logging.error(f"Error in execute_to_dicts: {str(e)}")
+            # Return original metrics as dictionaries as fallback
+            return [
+                {
+                    'value': metric.value,
+                    'timestamp': metric.timestamp,
+                    **({"label": metric.label} if hasattr(metric, 'label') and metric.label is not None else {})
+                }
+                for metric in self._metrics
+            ]
 
 
 class LegacyTransformationBuilder:

@@ -7,6 +7,7 @@ use crate::plugins::{
     FilterPlugin, AggregationPlugin, TimeGroupingPlugin,
     with_registry
 };
+use crate::plugin_impls::{LabelFilter, LabelInFilter};
 
 /// Trait for transformation strategies
 pub trait TransformationStrategy: Send + Sync {
@@ -213,32 +214,30 @@ impl MetricPipeline {
     
     /// Add a label filter transformation to the pipeline
     pub fn filter_by_label(&mut self, _py: Python<'_>, filter_type: &str, label: String) -> PyResult<()> {
-        with_registry(|registry| {
-            // Find the filter
-            if let Some(filter) = registry.get_filter(filter_type) {
-                self.strategies.push(Box::new(FilterTransformation::new(filter.clone())));
-                Ok(())
-            } else {
-                Err(pyo3::exceptions::PyValueError::new_err(
-                    format!("Unknown label filter type: {}", filter_type)
-                ))
-            }
-        })
+        if filter_type == "label_eq" {
+            // Create a new label filter directly
+            let filter_box: Box<dyn FilterPlugin> = Box::new(LabelFilter::new(label));
+            self.strategies.push(Box::new(FilterTransformation::new(filter_box)));
+            Ok(())
+        } else {
+            Err(pyo3::exceptions::PyValueError::new_err(
+                format!("Invalid label filter type: {}. Expected 'label_eq'", filter_type)
+            ))
+        }
     }
     
     /// Add a label inclusion filter transformation to the pipeline
     pub fn filter_by_labels(&mut self, _py: Python<'_>, filter_type: &str, labels: Vec<String>) -> PyResult<()> {
-        with_registry(|registry| {
-            // Find the filter
-            if let Some(filter) = registry.get_filter(filter_type) {
-                self.strategies.push(Box::new(FilterTransformation::new(filter.clone())));
-                Ok(())
-            } else {
-                Err(pyo3::exceptions::PyValueError::new_err(
-                    format!("Unknown label filter type: {}", filter_type)
-                ))
-            }
-        })
+        if filter_type == "label_in" {
+            // Create a new label_in filter directly
+            let filter_box: Box<dyn FilterPlugin> = Box::new(LabelInFilter::new(labels));
+            self.strategies.push(Box::new(FilterTransformation::new(filter_box)));
+            Ok(())
+        } else {
+            Err(pyo3::exceptions::PyValueError::new_err(
+                format!("Invalid label filter type: {}. Expected 'label_in'", filter_type)
+            ))
+        }
     }
     
     /// Execute the pipeline and return the result

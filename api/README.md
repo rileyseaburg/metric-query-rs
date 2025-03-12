@@ -1,24 +1,73 @@
-# Metric Query API
+orMetric Query API
 
-A Flask API that interfaces with the metric-query-rs Rust library to provide a RESTful interface for metric transformations.
+A powerful API for transforming, analyzing, and querying time-series metric data in streaming environments.
 
-## Overview
+## Project Structure
 
-This API allows teams to interact with a streaming data system without needing to understand its internals. It provides endpoints for:
+The API has been modularized for better organization, maintainability, and scalability:
 
-- Adding metrics (value, timestamp)
-- Adding labeled metrics (label, value, timestamp)
-- Retrieving metrics
-- Applying transformations to metrics (filters, aggregations, time groupings)
-
-## Installation
-
-1. Make sure you have the metric-query-rs library installed and available to Python.
-2. Install the required Python dependencies:
-
-```bash
-pip install -r requirements.txt
 ```
+api/
+├── app.py                   # Main application entry point
+├── config/                  # Configuration settings
+│   ├── __init__.py
+│   └── swagger.py           # Swagger API documentation configuration
+├── models/                  # Data models
+│   ├── __init__.py
+│   └── store.py             # In-memory storage for metrics
+├── routes/                  # API endpoints
+│   ├── __init__.py
+│   ├── docs.py              # Documentation endpoints
+│   ├── extensions.py        # Custom extension endpoints
+│   ├── labeled_metrics.py   # Labeled metrics endpoints
+│   ├── metrics.py           # Basic metrics endpoints
+│   └── tests.py             # Test endpoints
+├── utils/                   # Utility functions
+│   ├── __init__.py
+│   └── utils.py             # Common utilities
+└── metric_query_library/    # Core library for metrics processing
+    ├── __init__.py
+    ├── label_ops.py
+    ├── transformations.py
+    ├── type_defs.py
+    └── validation.py
+```
+
+## Features
+
+- **Basic Metrics**: Endpoints for adding and retrieving basic metrics (value, timestamp)
+- **Labeled Metrics**: Support for categorized metrics with labels
+- **Transformations**:
+  - Filtering (value thresholds)
+  - Aggregation (sum, avg, min, max)
+  - Time Grouping (minute, hour, day)
+- **Fluent Pipeline API**: Intuitive method chaining for transformations
+- **Plugin Architecture**: Extensible with custom filters, aggregations, and time groupings
+- **Comprehensive Documentation**: Interactive Swagger UI with examples and usage patterns
+
+## API Endpoints
+
+### Documentation
+- `GET /`: Complete API documentation and information
+
+### Basic Metrics
+- `GET /metrics`: Retrieve all basic metrics
+- `POST /metrics`: Add a new basic metric
+- `POST /metrics/transform`: Apply transformations to basic metrics
+- `POST /metrics/pipeline`: Use fluent pipeline API with basic metrics
+
+### Labeled Metrics
+- `GET /labeled-metrics`: Retrieve all labeled metrics
+- `POST /labeled-metrics`: Add a new labeled metric
+- `POST /labeled-metrics/transform`: Apply transformations to labeled metrics
+- `POST /labeled-metrics/pipeline`: Use fluent pipeline API with labeled metrics
+
+### Extensions
+- `POST /transformations/filters`: Register a custom filter
+- `POST /transformations/aggregations`: Register a custom aggregation
+
+### Tests
+- `POST /test`: Run predefined test cases
 
 ## Running the API
 
@@ -26,189 +75,21 @@ pip install -r requirements.txt
 python app.py
 ```
 
-The API will be available at http://localhost:5000
+The API will be available at `http://localhost:5000`. Swagger documentation is accessible at `http://localhost:5000/apidocs`.
 
-## API Endpoints
+## Development
 
-### Metrics
+The modular structure makes it easy to extend the API:
 
-#### POST /metrics
+1. To add new endpoints, create a new file in the `routes/` directory and register the blueprint in `app.py`
+2. To add new models, create a new file in the `models/` directory
+3. To add new utility functions, extend the `utils/utils.py` file
+4. To add new configuration options, extend the `config/` directory
 
-Add a new metric to the stream.
+## Design Principles
 
-**Request Body:**
-```json
-{
-  "value": 123,
-  "timestamp": 1646006400  // Optional, defaults to current time
-}
-```
-
-**Response:**
-```json
-{
-  "status": "success",
-  "id": 0
-}
-```
-
-#### GET /metrics
-
-Get all metrics.
-
-**Response:**
-```json
-[
-  {
-    "value": 123,
-    "timestamp": 1646006400
-  },
-  {
-    "value": 456,
-    "timestamp": 1646010000
-  }
-]
-```
-
-### Labeled Metrics
-
-#### POST /labeled-metrics
-
-Add a new labeled metric to the stream.
-
-**Request Body:**
-```json
-{
-  "label": "cpu",
-  "value": 123,
-  "timestamp": 1646006400  // Optional, defaults to current time
-}
-```
-
-**Response:**
-```json
-{
-  "status": "success",
-  "id": 0
-}
-```
-
-#### GET /labeled-metrics
-
-Get all labeled metrics.
-
-**Response:**
-```json
-[
-  {
-    "label": "cpu",
-    "value": 123,
-    "timestamp": 1646006400
-  },
-  {
-    "label": "memory",
-    "value": 456,
-    "timestamp": 1646010000
-  }
-]
-```
-
-### Transformations
-
-#### POST /metrics/transform
-
-Transform metrics according to specified transformations.
-
-**Request Body:**
-```json
-{
-  "transformations": [
-    {
-      "filter": {"type": "gt", "value": 100},
-      "aggregation": "sum",
-      "time_grouping": "hour"
-    },
-    {
-      "filter": {"type": "lt", "value": 1000}
-    }
-  ]
-}
-```
-
-**Response:**
-```json
-[
-  {
-    "value": 123,
-    "timestamp": 1646006400
-  }
-]
-```
-
-#### POST /labeled-metrics/transform
-
-Transform labeled metrics with additional support for label filtering.
-
-**Request Body:**
-```json
-{
-  "transformations": [
-    {
-      "filter": {"type": "gt", "value": 100},
-      "aggregation": "sum",
-      "time_grouping": "hour",
-      "label_filter": "cpu"
-    }
-  ]
-}
-```
-
-**Response:**
-```json
-[
-  {
-    "value": 123,
-    "timestamp": 1646006400
-  }
-]
-```
-
-## Supported Transformations
-
-### Filters
-
-- `gt` - Greater Than
-- `lt` - Less Than
-- `gte` - Greater Than or Equal
-- `lte` - Less Than or Equal
-- `eq` - Equal
-
-### Aggregations
-
-- `sum` - Sum
-- `avg` - Average
-- `min` - Minimum
-- `max` - Maximum
-
-### Time Groupings
-
-- `hour` - Group by hour
-- `minute` - Group by minute
-- `day` - Group by day
-
-## Extension Points
-
-The API includes placeholder endpoints for extending the functionality:
-
-- `/transformations/filters` - For registering custom filters
-- `/transformations/aggregations` - For registering custom aggregations
-
-| Note that true extensibility would require modifying the underlying Rust library.
-|
-## Documentation
-
-Detailed documentation is available in the [docs](docs) directory:
-
-- [Documentation Index](docs/README.md) - Start here for an overview of available documentation
-- [Labeled Metrics Endpoints](docs/labeled-metrics-endpoints.md) - Comprehensive documentation for all labeled metrics endpoints, including examples and best practices
-- [Labeled Metrics Pipeline API](docs/labeled-metrics-pipeline.md) - Detailed guide for the modern fluent pipeline API for labeled metrics
+- **Separation of Concerns**: Each module has a clear, specific responsibility
+- **Modularity**: Components are easy to extend, replace, or update independently
+- **RESTful Design**: Endpoints follow REST conventions
+- **Documentation**: Comprehensive inline documentation for all endpoints
+- **Type Safety**: Strong typing with validation for all inputs and outputs

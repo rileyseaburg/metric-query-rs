@@ -24,8 +24,8 @@ VALID_TIME_GROUPING_TYPES = {'hour', 'minute', 'day'}
 # Valid label filter types
 VALID_LABEL_FILTER_TYPES = {'label_eq', 'label_in'}
 
-# Linux epoch timestamp
-LINUX_EPOCH = datetime(1970, 1, 1).timestamp()
+# Linux epoch timestamp (hardcoded to 0)
+LINUX_EPOCH = 0  # January 1, 1970, UTC
 
 def validate_metric(data: Dict[str, Any]) -> Tuple[bool, Optional[str]]:
     """
