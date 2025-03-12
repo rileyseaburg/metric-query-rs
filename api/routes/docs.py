@@ -776,5 +776,5 @@ def sphinx_docs(path='index.html'):
       404:
         description: Documentation file not found
     """
-    docs_dir = os.path.join(current_app.root_path, '..', 'docs', '_build', 'html')
+    docs_dir = os.path.join(current_app.root_path, 'docs', '_build', 'html')
     return send_from_directory(docs_dir, path)
