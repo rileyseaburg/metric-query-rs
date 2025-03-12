@@ -1,0 +1,89 @@
+global:
+  environment: production
+  namespace: metrics-chart
+
+api:
+  name: metrics-api
+  replicaCount: 2
+  image:
+    repository: registry.quantum-forge.net/metrics-api
+    tag: latest
+    pullPolicy: Always
+  service:
+    type: ClusterIP
+    port: 80
+    targetPort: 5000
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+    requests:
+      cpu: 500m
+      memory: 512Mi
+  probes:
+    readiness:
+      path: /
+      port: 5000
+      initialDelaySeconds: 10
+      periodSeconds: 5
+    liveness:
+      path: /
+      port: 5000
+      initialDelaySeconds: 15
+      periodSeconds: 10
+
+ui:
+  name: metrics-ui
+  replicaCount: 2
+  image:
+    repository: registry.quantum-forge.net/metrics-ui
+    tag: latest
+    pullPolicy: Always
+  service:
+    type: ClusterIP
+    port: 80
+    targetPort: 3000
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 200m
+      memory: 256Mi
+  probes:
+    readiness:
+      path: /
+      port: 3000
+      initialDelaySeconds: 10
+      periodSeconds: 5
+    liveness:
+      path: /
+      port: 3000
+      initialDelaySeconds: 15
+      periodSeconds: 10
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "zerossl"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  hosts:
+    - host: metrics-demandbase.rileyseaburg.com
+      paths:
+        - path: /
+          pathType: Prefix
+          serviceName: metrics-ui-service
+          servicePort: 80
+    - host: api-metrics-demandbase.rileyseaburg.com
+      paths:
+        - path: /
+          pathType: Prefix
+          serviceName: metrics-api-service
+          servicePort: 80
+  tls:
+    - secretName: metrics-tls-secret
+      hosts:
+        - metrics-demandbase.rileyseaburg.com
+        - api-metrics-demandbase.rileyseaburg.com

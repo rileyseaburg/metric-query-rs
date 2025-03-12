@@ -1,0 +1,1464 @@
+{
+  "basicMetrics": [
+    {
+      "value": 990,
+      "timestamp": 1739459679777
+    },
+    {
+      "value": 764,
+      "timestamp": 1741694960322
+    },
+    {
+      "value": 223,
+      "timestamp": 1741029716851
+    },
+    {
+      "value": 218,
+      "timestamp": 1740355862626
+    },
+    {
+      "value": 939,
+      "timestamp": 1739929718285
+    },
+    {
+      "value": 390,
+      "timestamp": 1740483177432
+    },
+    {
+      "value": 452,
+      "timestamp": 1740792163024
+    },
+    {
+      "value": 675,
+      "timestamp": 1739698538577
+    },
+    {
+      "value": -46,
+      "timestamp": 1741744465053
+    },
+    {
+      "value": 238,
+      "timestamp": 1741203736567
+    },
+    {
+      "value": 414,
+      "timestamp": 1741434943106
+    },
+    {
+      "value": -35,
+      "timestamp": 1740146168274
+    },
+    {
+      "value": 124,
+      "timestamp": 1739364777582
+    },
+    {
+      "value": 596,
+      "timestamp": 1740977529322
+    },
+    {
+      "value": 405,
+      "timestamp": 1739762121974
+    },
+    {
+      "value": 721,
+      "timestamp": 1740517274837
+    },
+    {
+      "value": 446,
+      "timestamp": 1740062240135
+    },
+    {
+      "value": 35,
+      "timestamp": 1740312352631
+    },
+    {
+      "value": 407,
+      "timestamp": 1739682123376
+    },
+    {
+      "value": -94,
+      "timestamp": 1741111142780
+    },
+    {
+      "value": 604,
+      "timestamp": 1740704218983
+    },
+    {
+      "value": 61,
+      "timestamp": 1741595593787
+    },
+    {
+      "value": 492,
+      "timestamp": 1740141229927
+    },
+    {
+      "value": 185,
+      "timestamp": 1740121097143
+    },
+    {
+      "value": 678,
+      "timestamp": 1739596212137
+    },
+    {
+      "value": 511,
+      "timestamp": 1739619445301
+    },
+    {
+      "value": -39,
+      "timestamp": 1739298919884
+    },
+    {
+      "value": 797,
+      "timestamp": 1740766243146
+    },
+    {
+      "value": 438,
+      "timestamp": 1741569872084
+    },
+    {
+      "value": 717,
+      "timestamp": 1741665069129
+    },
+    {
+      "value": 351,
+      "timestamp": 1741686145355
+    },
+    {
+      "value": 596,
+      "timestamp": 1740308419745
+    },
+    {
+      "value": 250,
+      "timestamp": 1739469085744
+    },
+    {
+      "value": 387,
+      "timestamp": 1741370698025
+    },
+    {
+      "value": -12,
+      "timestamp": 1740298522751
+    },
+    {
+      "value": 14,
+      "timestamp": 1740555198040
+    },
+    {
+      "value": 401,
+      "timestamp": 1741456527584
+    },
+    {
+      "value": 349,
+      "timestamp": 1741550895250
+    },
+    {
+      "value": 563,
+      "timestamp": 1739164870570
+    },
+    {
+      "value": 9007199254740991,
+      "timestamp": 1741750813298
+    },
+    {
+      "value": 777,
+      "timestamp": 1741669592018
+    },
+    {
+      "value": 665,
+      "timestamp": 1739818853974
+    },
+    {
+      "value": -61,
+      "timestamp": 1741260959838
+    },
+    {
+      "value": 501,
+      "timestamp": 1739641527234
+    },
+    {
+      "value": 544,
+      "timestamp": 1740068578693
+    },
+    {
+      "value": 393,
+      "timestamp": 1739411201011
+    },
+    {
+      "value": 839,
+      "timestamp": 1740861640361
+    },
+    {
+      "value": 376,
+      "timestamp": 1739505118218
+    },
+    {
+      "value": 98,
+      "timestamp": 1740794189654
+    },
+    {
+      "value": 828,
+      "timestamp": 1740356301842
+    },
+    {
+      "value": 349,
+      "timestamp": 1740717177200
+    },
+    {
+      "value": 589,
+      "timestamp": 1740087179860
+    },
+    {
+      "value": 895,
+      "timestamp": 1739530293058
+    },
+    {
+      "value": -49,
+      "timestamp": 1739640577624
+    },
+    {
+      "value": 980,
+      "timestamp": 1740300823836
+    },
+    {
+      "value": 759,
+      "timestamp": 1741502920143
+    },
+    {
+      "value": 78,
+      "timestamp": 1739602627712
+    },
+    {
+      "value": 162,
+      "timestamp": 1739702551593
+    },
+    {
+      "value": -7,
+      "timestamp": 1739461151403
+    },
+    {
+      "value": 894,
+      "timestamp": 1740358465044
+    },
+    {
+      "value": 170,
+      "timestamp": 1740082554387
+    },
+    {
+      "value": 925,
+      "timestamp": 1740293661627
+    },
+    {
+      "value": 643,
+      "timestamp": 1739642882516
+    },
+    {
+      "value": -36,
+      "timestamp": 1739451896479
+    },
+    {
+      "value": 998,
+      "timestamp": 1741135629119
+    },
+    {
+      "value": 233,
+      "timestamp": 1740729356570
+    },
+    {
+      "value": 819,
+      "timestamp": 1740109199545
+    },
+    {
+      "value": 401,
+      "timestamp": 1740343656240
+    },
+    {
+      "value": 45,
+      "timestamp": 1739193298735
+    },
+    {
+      "value": 31,
+      "timestamp": 1740127482024
+    },
+    {
+      "value": 986,
+      "timestamp": 1739856262126
+    },
+    {
+      "value": 681,
+      "timestamp": 1740814977310
+    },
+    {
+      "value": 307,
+      "timestamp": 1741569343487
+    },
+    {
+      "value": 371,
+      "timestamp": 1741685580987
+    },
+    {
+      "value": 368,
+      "timestamp": 1739415275193
+    },
+    {
+      "value": 846,
+      "timestamp": 1739864222664
+    },
+    {
+      "value": 500,
+      "timestamp": 1739500858561
+    },
+    {
+      "value": 45,
+      "timestamp": 1740581593877
+    },
+    {
+      "value": 89,
+      "timestamp": 1739601404102
+    },
+    {
+      "value": 858,
+      "timestamp": 1741718135586
+    },
+    {
+      "value": 307,
+      "timestamp": 1741342809773
+    },
+    {
+      "value": -57,
+      "timestamp": 1740614480756
+    },
+    {
+      "value": 100,
+      "timestamp": 1741747214298
+    },
+    {
+      "value": 0,
+      "timestamp": 1741750811298
+    },
+    {
+      "value": 226,
+      "timestamp": 1739190326264
+    },
+    {
+      "value": 922,
+      "timestamp": 1740075638344
+    },
+    {
+      "value": 943,
+      "timestamp": 1739756544605
+    },
+    {
+      "value": 934,
+      "timestamp": 1740161685233
+    },
+    {
+      "value": 868,
+      "timestamp": 1741611425715
+    },
+    {
+      "value": 333,
+      "timestamp": 1740979777912
+    },
+    {
+      "value": 311,
+      "timestamp": 1741478673364
+    },
+    {
+      "value": 824,
+      "timestamp": 1741385385613
+    },
+    {
+      "value": 347,
+      "timestamp": 1739564832307
+    },
+    {
+      "value": -77,
+      "timestamp": 1741534901428
+    },
+    {
+      "value": 50,
+      "timestamp": 1741743614298
+    },
+    {
+      "value": 227,
+      "timestamp": 1739818862776
+    },
+    {
+      "value": 442,
+      "timestamp": 1739776043100
+    },
+    {
+      "value": 30,
+      "timestamp": 1740975577537
+    },
+    {
+      "value": 717,
+      "timestamp": 1740501225587
+    },
+    {
+      "value": -9007199254740991,
+      "timestamp": 1741750812298
+    },
+    {
+      "value": 469,
+      "timestamp": 1741689691141
+    },
+    {
+      "value": 293,
+      "timestamp": 1740715624905
+    },
+    {
+      "value": 86,
+      "timestamp": 1741282048696
+    },
+    {
+      "value": 51,
+      "timestamp": 1741743614298
+    },
+    {
+      "value": 999,
+      "timestamp": 1739654410276
+    },
+    {
+      "value": 42,
+      "timestamp": 0
+    },
+    {
+      "value": 627,
+      "timestamp": 1740752329441
+    }
+  ],
+  "extendedMetrics": [
+    {
+      "label": "CPU_USAGE",
+      "value": 223,
+      "timestamp": 1740386425836
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 43,
+      "timestamp": 1741014822525
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 485,
+      "timestamp": 1739495202769
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 104,
+      "timestamp": 1741130735617
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": -19,
+      "timestamp": 1739507909426
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 962,
+      "timestamp": 1741183199941
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": -58,
+      "timestamp": 1741680488089
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 440,
+      "timestamp": 1740036858085
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": -45,
+      "timestamp": 1741456457846
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 655,
+      "timestamp": 1740262972601
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 406,
+      "timestamp": 1739295687123
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 384,
+      "timestamp": 1739826215831
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 718,
+      "timestamp": 1741285748079
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": -27,
+      "timestamp": 1739802597589
+    },
+    {
+      "label": "API_LATENCY",
+      "value": -89,
+      "timestamp": 1739796228382
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 903,
+      "timestamp": 1740966552855
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 805,
+      "timestamp": 1741303425854
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 458,
+      "timestamp": 1740104823065
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 732,
+      "timestamp": 1740681452452
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 549,
+      "timestamp": 1741443608359
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 298,
+      "timestamp": 1741631301988
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": -100,
+      "timestamp": 1741512186684
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 365,
+      "timestamp": 1740434783168
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": -98,
+      "timestamp": 1741372588370
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 907,
+      "timestamp": 1741034526044
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 557,
+      "timestamp": 1740593962968
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 80,
+      "timestamp": 1741743614299
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 210,
+      "timestamp": 1739392663515
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": -41,
+      "timestamp": 1741248230809
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 42,
+      "timestamp": 1740359005316
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": -48,
+      "timestamp": 1739626694895
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 778,
+      "timestamp": 1740439536261
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 469,
+      "timestamp": 1740790748990
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 793,
+      "timestamp": 1739353052996
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 325,
+      "timestamp": 1739588619232
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 744,
+      "timestamp": 1739922848426
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 147,
+      "timestamp": 1741737562538
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 330,
+      "timestamp": 1740394699334
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 832,
+      "timestamp": 1739475209162
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 580,
+      "timestamp": 1739932762477
+    },
+    {
+      "label": "API_LATENCY",
+      "value": -45,
+      "timestamp": 1741700974418
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 6,
+      "timestamp": 1739245664864
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 255,
+      "timestamp": 1740192627395
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 817,
+      "timestamp": 1741270475871
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 502,
+      "timestamp": 1739562075400
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 142,
+      "timestamp": 1740228386332
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 51,
+      "timestamp": 1741274449707
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 724,
+      "timestamp": 1740563359198
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 676,
+      "timestamp": 1740968217560
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": -93,
+      "timestamp": 1739351765511
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 105,
+      "timestamp": 1740377884455
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 961,
+      "timestamp": 1739968075180
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 414,
+      "timestamp": 1741260642618
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 668,
+      "timestamp": 1741631842396
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 522,
+      "timestamp": 1741576191931
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 239,
+      "timestamp": 1739418557737
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 767,
+      "timestamp": 1739558833187
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 23,
+      "timestamp": 1741601059261
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 519,
+      "timestamp": 1739933109869
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 411,
+      "timestamp": 1740064686150
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 791,
+      "timestamp": 1739819506280
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 368,
+      "timestamp": 1739554660295
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 967,
+      "timestamp": 1740353457468
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": -15,
+      "timestamp": 1739709788636
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 587,
+      "timestamp": 1740329421811
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 612,
+      "timestamp": 1741181093582
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 861,
+      "timestamp": 1740383642411
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 42,
+      "timestamp": 0
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 658,
+      "timestamp": 1741002283842
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 40,
+      "timestamp": 1740125441153
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 155,
+      "timestamp": 1740510671712
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 303,
+      "timestamp": 1741395455182
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 45,
+      "timestamp": 1741112463996
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 446,
+      "timestamp": 1740036690286
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 793,
+      "timestamp": 1740509648121
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 400,
+      "timestamp": 1739457870717
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 490,
+      "timestamp": 1741290437553
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 392,
+      "timestamp": 1741260840178
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 203,
+      "timestamp": 1741660673834
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 449,
+      "timestamp": 1741033192489
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 891,
+      "timestamp": 1740091779252
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 655,
+      "timestamp": 1741656576532
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 398,
+      "timestamp": 1740899303904
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 559,
+      "timestamp": 1741649829952
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": -75,
+      "timestamp": 1739603024868
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 271,
+      "timestamp": 1740357087699
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 943,
+      "timestamp": 1740670575435
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 177,
+      "timestamp": 1741003292124
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": -18,
+      "timestamp": 1741633776261
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": -84,
+      "timestamp": 1741434197289
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 577,
+      "timestamp": 1740989939255
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 171,
+      "timestamp": 1740301441417
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 100,
+      "timestamp": 1741747214299
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 191,
+      "timestamp": 1740303297076
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 728,
+      "timestamp": 1740606079688
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 373,
+      "timestamp": 1739810227056
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 137,
+      "timestamp": 1740550864635
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 279,
+      "timestamp": 1741463932475
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 362,
+      "timestamp": 1740949868105
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 876,
+      "timestamp": 1740796138382
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 136,
+      "timestamp": 1741358959623
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 136,
+      "timestamp": 1740298286793
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 101,
+      "timestamp": 1741747214299
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 160,
+      "timestamp": 1741539997781
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 11,
+      "timestamp": 1739357902739
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 544,
+      "timestamp": 1739540628223
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 289,
+      "timestamp": 1741635241095
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 90,
+      "timestamp": 1741743614299
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 67,
+      "timestamp": 1740245912263
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 360,
+      "timestamp": 1740495655743
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 220,
+      "timestamp": 1739484815480
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 129,
+      "timestamp": 1739203945344
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 854,
+      "timestamp": 1741492911413
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 43,
+      "timestamp": 1000
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 516,
+      "timestamp": 1741603102771
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 775,
+      "timestamp": 1741060083363
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 161,
+      "timestamp": 1741169839702
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 48,
+      "timestamp": 1740520384996
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 481,
+      "timestamp": 1739526608354
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 974,
+      "timestamp": 1741691070768
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 348,
+      "timestamp": 1740988403309
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 417,
+      "timestamp": 1739383075635
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 805,
+      "timestamp": 1741059870782
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 235,
+      "timestamp": 1739654329221
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 394,
+      "timestamp": 1739530119169
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 331,
+      "timestamp": 1740372548277
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 55,
+      "timestamp": 1740014234211
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 323,
+      "timestamp": 1739429843510
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 429,
+      "timestamp": 1740686375904
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 616,
+      "timestamp": 1741139401646
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 112,
+      "timestamp": 1740448236228
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 912,
+      "timestamp": 1739285679835
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 822,
+      "timestamp": 1740916983911
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 372,
+      "timestamp": 1740242184867
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 570,
+      "timestamp": 1740790653005
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 890,
+      "timestamp": 1741473849332
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 338,
+      "timestamp": 1739818707900
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 218,
+      "timestamp": 1741534891761
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 869,
+      "timestamp": 1739704529262
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 91,
+      "timestamp": 1740602036917
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 490,
+      "timestamp": 1740156597151
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 746,
+      "timestamp": 1741146587607
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 496,
+      "timestamp": 1741180673027
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 734,
+      "timestamp": 1740944258350
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 360,
+      "timestamp": 1739655374749
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 2,
+      "timestamp": 1739942934523
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 454,
+      "timestamp": 1741111235376
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 305,
+      "timestamp": 1740298667757
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": -60,
+      "timestamp": 1740835204453
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 351,
+      "timestamp": 1740962096999
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 491,
+      "timestamp": 1741714508968
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 987,
+      "timestamp": 1741535962528
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 611,
+      "timestamp": 1739338804888
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 434,
+      "timestamp": 1739657803328
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 676,
+      "timestamp": 1741606299888
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 159,
+      "timestamp": 1741456507051
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 158,
+      "timestamp": 1740417131623
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 462,
+      "timestamp": 1740189967475
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 773,
+      "timestamp": 1741330419997
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 514,
+      "timestamp": 1739724532223
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 851,
+      "timestamp": 1741387025901
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 465,
+      "timestamp": 1740363538339
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 511,
+      "timestamp": 1740673206870
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 859,
+      "timestamp": 1739696509181
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 173,
+      "timestamp": 1741122902937
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 436,
+      "timestamp": 1739724280442
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 716,
+      "timestamp": 1739991900433
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 911,
+      "timestamp": 1741481617464
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 597,
+      "timestamp": 1741054213401
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 533,
+      "timestamp": 1741340488888
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 569,
+      "timestamp": 1741115333043
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 578,
+      "timestamp": 1741465443329
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 575,
+      "timestamp": 1739853151792
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 598,
+      "timestamp": 1741335499344
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 873,
+      "timestamp": 1740214005004
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 453,
+      "timestamp": 1741403299500
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 77,
+      "timestamp": 1740216808006
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 346,
+      "timestamp": 1741581045180
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 410,
+      "timestamp": 1741552853971
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 958,
+      "timestamp": 1739206012996
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 430,
+      "timestamp": 1741095449203
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 898,
+      "timestamp": 1739943410529
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 443,
+      "timestamp": 1741652428215
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 66,
+      "timestamp": 1740299060747
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 683,
+      "timestamp": 1739626681473
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 641,
+      "timestamp": 1741024383115
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 446,
+      "timestamp": 1740228284476
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 869,
+      "timestamp": 1741357889896
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": -19,
+      "timestamp": 1740728580612
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 212,
+      "timestamp": 1739249945808
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": -25,
+      "timestamp": 1741521461258
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 336,
+      "timestamp": 1741471536485
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 546,
+      "timestamp": 1739989557531
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 65,
+      "timestamp": 1741482350433
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 789,
+      "timestamp": 1739627999702
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 412,
+      "timestamp": 1740546774945
+    },
+    {
+      "label": "API_LATENCY",
+      "value": -50,
+      "timestamp": 1739795294757
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 33,
+      "timestamp": 1739652414824
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 822,
+      "timestamp": 1740796125491
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 519,
+      "timestamp": 1741495517670
+    },
+    {
+      "label": "DB_CONNECTIONS",
+      "value": 355,
+      "timestamp": 1741184012543
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 399,
+      "timestamp": 1741098594151
+    },
+    {
+      "label": "NETWORK_THROUGHPUT",
+      "value": 457,
+      "timestamp": 1740891175222
+    },
+    {
+      "label": "MEMORY_USAGE",
+      "value": 108,
+      "timestamp": 1740205444459
+    },
+    {
+      "label": "CPU_USAGE",
+      "value": 225,
+      "timestamp": 1741077598656
+    },
+    {
+      "label": "API_LATENCY",
+      "value": 356,
+      "timestamp": 1740139929492
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+global:
+  environment: development
+
+api:
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+
+ui:
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 300m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+ingress:
+  enabled: true
+  hosts:
+    - host: dev-metrics-demandbase.rileyseaburg.com
+      paths:
+        - path: /
+          pathType: Prefix
+          serviceName: metrics-ui-service
+          servicePort: 80
+    - host: dev-api-metrics-demandbase.rileyseaburg.com
+      paths:
+        - path: /
+          pathType: Prefix
+          serviceName: metrics-api-service
+          servicePort: 80
+  tls:
+    - secretName: metrics-tls-dev-secret
+      hosts:
+        - dev-metrics-demandbase.rileyseaburg.com
+        - dev-api-metrics-demandbase.rileyseaburg.com
