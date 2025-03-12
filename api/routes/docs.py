@@ -720,7 +720,7 @@ def api_info():
         },
         
         "reference_implementation": {
-            "github_repository": "https://github.com/example/metric-query-rs",
+            "github_repository": "https://github.com/rileyseaburg/metric-query-rs",
             "core_components": {
                 "metric_models": "src/models/",
                 "transformations": "src/transformations.rs",
