@@ -7,7 +7,7 @@ api:
   replicaCount: 2
   image:
     repository: registry.quantum-forge.net/metrics-api
-    tag: 0.05
+    tag: 0.06
     pullPolicy: Always
   service:
     type: ClusterIP

@@ -5,7 +5,7 @@ from flask import jsonify, Blueprint, send_from_directory, current_app
 import os
 
 # Create a Blueprint for the documentation routes
-docs_bp = Blueprint('docs', __name__, static_folder='docs/_build/html')
+docs_bp = Blueprint('docs', __name__)
 
 @docs_bp.route('/', methods=['GET'])
 def api_info():

@@ -1,0 +1,311 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Reference &mdash; metric_query_library  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Usage" href="usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            metric_query_library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#metric-query-library">metric_query_library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metric-query-library-transformations">metric_query_library.transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metric-query-library-label-ops">metric_query_library.label_ops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metric-query-library-type-defs">metric_query_library.type_defs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metric-query-library-validation">metric_query_library.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rust-api">Rust API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#core-transformations">Core Transformations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#metric_query_library._rust.moving_average"><code class="docutils literal notranslate"><span class="pre">metric_query_library._rust.moving_average()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metric_query_library._rust.rate"><code class="docutils literal notranslate"><span class="pre">metric_query_library._rust.rate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metric_query_library._rust.sum"><code class="docutils literal notranslate"><span class="pre">metric_query_library._rust.sum()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#label-operations">Label Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#metric_query_library._rust.filter_by_label"><code class="docutils literal notranslate"><span class="pre">metric_query_library._rust.filter_by_label()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metric_query_library._rust.group_by_label"><code class="docutils literal notranslate"><span class="pre">metric_query_library._rust.group_by_label()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#metric-query-library">metric_query_library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metric-query-library-transformations">metric_query_library.transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metric-query-library-label-ops">metric_query_library.label_ops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metric-query-library-type-defs">metric_query_library.type_defs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metric-query-library-validation">metric_query_library.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rust-api">Rust API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#core-transformations">Core Transformations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#metric_query_library._rust.moving_average"><code class="docutils literal notranslate"><span class="pre">metric_query_library._rust.moving_average()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metric_query_library._rust.rate"><code class="docutils literal notranslate"><span class="pre">metric_query_library._rust.rate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metric_query_library._rust.sum"><code class="docutils literal notranslate"><span class="pre">metric_query_library._rust.sum()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#label-operations">Label Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#metric_query_library._rust.filter_by_label"><code class="docutils literal notranslate"><span class="pre">metric_query_library._rust.filter_by_label()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metric_query_library._rust.group_by_label"><code class="docutils literal notranslate"><span class="pre">metric_query_library._rust.group_by_label()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#metric-query-library">metric_query_library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metric-query-library-transformations">metric_query_library.transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metric-query-library-label-ops">metric_query_library.label_ops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metric-query-library-type-defs">metric_query_library.type_defs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metric-query-library-validation">metric_query_library.validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rust-api">Rust API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#core-transformations">Core Transformations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#metric_query_library._rust.moving_average"><code class="docutils literal notranslate"><span class="pre">metric_query_library._rust.moving_average()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metric_query_library._rust.rate"><code class="docutils literal notranslate"><span class="pre">metric_query_library._rust.rate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metric_query_library._rust.sum"><code class="docutils literal notranslate"><span class="pre">metric_query_library._rust.sum()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#label-operations">Label Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#metric_query_library._rust.filter_by_label"><code class="docutils literal notranslate"><span class="pre">metric_query_library._rust.filter_by_label()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metric_query_library._rust.group_by_label"><code class="docutils literal notranslate"><span class="pre">metric_query_library._rust.group_by_label()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">metric_query_library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
+<p>This page provides detailed documentation for the Metric Query Library API.</p>
+<section id="metric-query-library">
+<h2>metric_query_library<a class="headerlink" href="#metric-query-library" title="Link to this heading"></a></h2>
+</section>
+<section id="metric-query-library-transformations">
+<h2>metric_query_library.transformations<a class="headerlink" href="#metric-query-library-transformations" title="Link to this heading"></a></h2>
+</section>
+<section id="metric-query-library-label-ops">
+<h2>metric_query_library.label_ops<a class="headerlink" href="#metric-query-library-label-ops" title="Link to this heading"></a></h2>
+</section>
+<section id="metric-query-library-type-defs">
+<h2>metric_query_library.type_defs<a class="headerlink" href="#metric-query-library-type-defs" title="Link to this heading"></a></h2>
+</section>
+<section id="metric-query-library-validation">
+<h2>metric_query_library.validation<a class="headerlink" href="#metric-query-library-validation" title="Link to this heading"></a></h2>
+</section>
+<section id="rust-api">
+<h2>Rust API<a class="headerlink" href="#rust-api" title="Link to this heading"></a></h2>
+<p>The following functions are implemented in Rust and exposed to Python:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These functions are documented here for completeness, but they are typically accessed through the Python API described above.</p>
+</div>
+<section id="core-transformations">
+<h3>Core Transformations<a class="headerlink" href="#core-transformations" title="Link to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="metric_query_library._rust.moving_average">
+<span class="sig-prename descclassname"><span class="pre">metric_query_library._rust.</span></span><span class="sig-name descname"><span class="pre">moving_average</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metric_query_library._rust.moving_average" title="Link to this definition"></a></dt>
+<dd><p>Calculate the moving average of a metric over a specified window size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metric</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – The metric to transform</p></li>
+<li><p><strong>window_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The size of the moving average window</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new metric with the moving average values</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="metric_query_library._rust.rate">
+<span class="sig-prename descclassname"><span class="pre">metric_query_library._rust.</span></span><span class="sig-name descname"><span class="pre">rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metric_query_library._rust.rate" title="Link to this definition"></a></dt>
+<dd><p>Calculate the rate of change of a metric.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>metric</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – The metric to transform</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new metric with the rate values</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="metric_query_library._rust.sum">
+<span class="sig-prename descclassname"><span class="pre">metric_query_library._rust.</span></span><span class="sig-name descname"><span class="pre">sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metric_query_library._rust.sum" title="Link to this definition"></a></dt>
+<dd><p>Sum multiple metrics together.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>metrics</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a>) – A list of metrics to sum</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new metric with the summed values</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="label-operations">
+<h3>Label Operations<a class="headerlink" href="#label-operations" title="Link to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="metric_query_library._rust.filter_by_label">
+<span class="sig-prename descclassname"><span class="pre">metric_query_library._rust.</span></span><span class="sig-name descname"><span class="pre">filter_by_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metric_query_library._rust.filter_by_label" title="Link to this definition"></a></dt>
+<dd><p>Filter metrics by label.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metrics</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a>) – A list of metrics to filter</p></li>
+<li><p><strong>labels</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – A dictionary of labels to filter by</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of metrics that match the labels</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="metric_query_library._rust.group_by_label">
+<span class="sig-prename descclassname"><span class="pre">metric_query_library._rust.</span></span><span class="sig-name descname"><span class="pre">group_by_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_keys</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metric_query_library._rust.group_by_label" title="Link to this definition"></a></dt>
+<dd><p>Group metrics by label.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metrics</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a>) – A list of metrics to group</p></li>
+<li><p><strong>label_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a>) – A list of label keys to group by</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary of grouped metrics</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Metric Query Library Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
