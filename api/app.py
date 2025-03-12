@@ -1337,32 +1337,77 @@ def pipeline_transform():
     tags:
       - Transformations
     description: |
-      Apply transformations to metrics using a fluent pipeline API.
-      This endpoint demonstrates the new fluent interface for chaining transformations.
+      Metric Pipeline Transformation API
       
-      Example request body:
-      ```json
+      This endpoint allows you to transform time-series metrics using a fluent pipeline interface. 
+      It's designed to help junior data engineers apply complex transformations with minimal code.
+      
+      How Pipeline Transformations Work:
+      
+      1. The Pipeline Concept: Think of a pipeline as a series of data processing steps. Each metric flows through these steps in sequence.
+      2. Sequential Processing: Operations are applied in the exact order you specify them in the pipeline array.
+      3. Transformation Flow: Metrics → Filter Operations → Aggregation Operations → Time Grouping Operations → Results
+      
+      Request Format:
+      
       {
         "pipeline": [
-          {"operation": "filter", "type": "gt", "value": 100},
-          {"operation": "group_by_hour"},
-          {"operation": "aggregate", "type": "sum"}
+          {"operation": "greater_than", "value": 50},
+          {"operation": "group_by_hour", "aggregation": "sum"}
         ]
       }
-      ```
       
-      Available operations:
-      - filter: Apply a filter (requires type and value)
-      - greater_than: Shorthand for filter with type="gt" (requires value)
-      - less_than: Shorthand for filter with type="lt" (requires value)
-      - equal_to: Shorthand for filter with type="eq" (requires value)
-      - aggregate: Apply aggregation (requires type)
-      - sum: Shorthand for aggregate with type="sum"
-      - average: Shorthand for aggregate with type="avg" 
-      - group_by: Group by time and apply aggregation (requires time_grouping and aggregation)
-      - group_by_minute: Shorthand for group_by with time_grouping="minute" (optional aggregation, default sum)
-      - group_by_hour: Shorthand for group_by with time_grouping="hour" (optional aggregation, default sum)
-      - group_by_day: Shorthand for group_by with time_grouping="day" (optional aggregation, default sum)
+      Common Use Cases:
+      
+      Filtering High-Value Metrics:
+      {
+        "pipeline": [
+          {"operation": "greater_than", "value": 100}
+        ]
+      }
+      This filters your metrics to only include values greater than 100.
+      
+      Finding Hourly Averages:
+      {
+        "pipeline": [
+          {"operation": "group_by_hour", "aggregation": "avg"}
+        ]
+      }
+      This groups metrics by hour and calculates the average value for each hour.
+      
+      Daily Max Values Above Threshold:
+      {
+        "pipeline": [
+          {"operation": "greater_than", "value": 50},
+          {"operation": "group_by_day", "aggregation": "max"}
+        ]
+      }
+      This filters metrics to those above 50, then finds the maximum value for each day.
+      
+      Available Operations:
+      
+      Filter Operations:
+      - filter: Generic filter - type: One of (gt, lt, ge, le, eq), value: Number to compare against
+      - greater_than: Value > threshold - value: Number
+      - less_than: Value < threshold - value: Number 
+      - equal_to: Value = threshold - value: Number
+      
+      Aggregation Operations:
+      - aggregate: Generic aggregation - type: One of (sum, avg, min, max)
+      - sum: Sum all values - No parameters
+      - average: Average of values - No parameters
+      
+      Time Grouping Operations:
+      - group_by: Generic time grouping - time_grouping: One of (minute, hour, day), aggregation: One of (sum, avg, min, max)
+      - group_by_minute: Group by minute - aggregation: Aggregation type (default: sum)
+      - group_by_hour: Group by hour - aggregation: Aggregation type (default: sum)
+      - group_by_day: Group by day - aggregation: Aggregation type (default: sum)
+      
+      Common Mistakes to Avoid:
+      
+      1. Order Matters: Placing a grouping operation before filtering will give different results than filtering first.
+      2. Multiple Aggregations: You can't chain multiple aggregations together (e.g., sum, then avg).
+      3. Time Unit Selection: Choose appropriate time units - minute grouping on months of data will return many data points.
     parameters:
       - in: body
         name: body
@@ -1514,28 +1559,79 @@ def labeled_pipeline_transform():
     tags:
       - Transformations
     description: |
-      Apply transformations to labeled metrics using a fluent pipeline API.
-      This endpoint demonstrates working with labeled metrics using the new interface.
+      Labeled Metrics Pipeline API
       
-      Example request body:
-      ```json
+      This endpoint extends the pipeline API to work with labeled metrics (metrics that have a category/label attached).
+      It's particularly useful for junior data engineers who need to analyze metrics across different categories.
+      
+      How Labeled Metrics Work:
+      
+      1. Labels vs. Regular Metrics: Labeled metrics contain an additional "label" field that categorizes the metric (e.g., "CPU_USAGE", "MEMORY_USAGE")
+      2. Two-Stage Processing: First, you filter by labels, then you apply regular transformations
+      3. Common Pattern: Filter to specific metric types, then analyze trends or patterns within those types
+      
+      Request Format:
+      
       {
         "label_operations": [
-          {"operation": "filter_by_label", "label": "cpu_usage"}
+          {"operation": "filter_by_label", "label": "CPU_USAGE"}
         ],
         "pipeline": [
-          {"operation": "filter", "type": "gt", "value": 50},
-          {"operation": "group_by_hour"},
-          {"operation": "aggregate", "type": "avg"}
+          {"operation": "greater_than", "value": 50},
+          {"operation": "group_by_hour", "aggregation": "avg"}
         ]
       }
-      ```
       
-      Available label operations:
-      - filter_by_label: Filter metrics by exact label match (requires label)
-      - filter_by_labels: Filter metrics by multiple labels (requires labels array)
+      Common Use Cases:
       
-      See /metrics/pipeline for available pipeline operations.
+      Analyzing CPU Usage Patterns:
+      {
+        "label_operations": [
+          {"operation": "filter_by_label", "label": "CPU_USAGE"}
+        ],
+        "pipeline": [
+          {"operation": "group_by_hour", "aggregation": "avg"}
+        ]
+      }
+      This calculates hourly average CPU usage.
+      
+      Finding Memory Usage Spikes:
+      {
+        "label_operations": [
+          {"operation": "filter_by_label", "label": "MEMORY_USAGE"}
+        ],
+        "pipeline": [
+          {"operation": "group_by_hour", "aggregation": "max"}
+        ]
+      }
+      This identifies peak memory usage per hour.
+      
+      Comparing Multiple Metrics:
+      {
+        "label_operations": [
+          {"operation": "filter_by_labels", "labels": ["CPU_USAGE", "MEMORY_USAGE"]}
+        ],
+        "pipeline": [
+          {"operation": "greater_than", "value": 80},
+          {"operation": "group_by_day", "aggregation": "count"}
+        ]
+      }
+      This counts how many high-usage events (>80%) occur each day for both CPU and memory.
+      
+      Label Operations:
+      
+      - filter_by_label: Keep metrics with a specific label - label: String 
+      - filter_by_labels: Keep metrics with any of these labels - labels: Array of strings
+      
+      Pipeline Operations:
+      
+      The same pipeline operations from /metrics/pipeline are available for labeled metrics.
+      
+      Working with Labels - Best Practices:
+      
+      1. Filter First: Always filter by label first to reduce the dataset size before applying transformations
+      2. Consistent Labels: Ensure your label names are consistent (e.g., "CPU_USAGE" vs "cpu_usage")
+      3. Related Labels: When using multiple labels, make sure they're logically related for meaningful analysis
     parameters:
       - in: body
         name: body

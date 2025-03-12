@@ -203,4 +203,12 @@ The API includes placeholder endpoints for extending the functionality:
 - `/transformations/filters` - For registering custom filters
 - `/transformations/aggregations` - For registering custom aggregations
 
-Note that true extensibility would require modifying the underlying Rust library.
+| Note that true extensibility would require modifying the underlying Rust library.
+|
+## Documentation
+
+Detailed documentation is available in the [docs](docs) directory:
+
+- [Documentation Index](docs/README.md) - Start here for an overview of available documentation
+- [Labeled Metrics Endpoints](docs/labeled-metrics-endpoints.md) - Comprehensive documentation for all labeled metrics endpoints, including examples and best practices
+- [Labeled Metrics Pipeline API](docs/labeled-metrics-pipeline.md) - Detailed guide for the modern fluent pipeline API for labeled metrics

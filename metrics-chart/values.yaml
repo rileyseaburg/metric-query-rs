@@ -7,7 +7,7 @@ api:
   replicaCount: 2
   image:
     repository: registry.quantum-forge.net/metrics-api
-    tag: latest
+    tag: 0.0.2
     pullPolicy: Always
   service:
     type: ClusterIP
@@ -37,7 +37,7 @@ ui:
   replicaCount: 2
   image:
     repository: registry.quantum-forge.net/metrics-ui
-    tag: latest
+    tag: 0.0.2
     pullPolicy: Always
   service:
     type: ClusterIP
