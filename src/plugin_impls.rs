@@ -27,7 +27,7 @@ impl FilterPlugin for GreaterThanFilter {
         "gt"
     }
     
-    fn apply(&self, metric: &Metric) -> bool {
+    fn apply(&self, metric: &Metric) -> bool { // Updated signature
         metric.value > self.value
     }
     
@@ -53,7 +53,7 @@ impl FilterPlugin for LessThanFilter {
         "lt"
     }
     
-    fn apply(&self, metric: &Metric) -> bool {
+    fn apply(&self, metric: &Metric) -> bool { // Updated signature
         metric.value < self.value
     }
     
@@ -79,7 +79,7 @@ impl FilterPlugin for GreaterThanOrEqualFilter {
         "ge"
     }
     
-    fn apply(&self, metric: &Metric) -> bool {
+    fn apply(&self, metric: &Metric) -> bool { // Updated signature
         metric.value >= self.value
     }
     
@@ -105,7 +105,7 @@ impl FilterPlugin for LessThanOrEqualFilter {
         "le"
     }
     
-    fn apply(&self, metric: &Metric) -> bool {
+    fn apply(&self, metric: &Metric) -> bool { // Updated signature
         metric.value <= self.value
     }
     
@@ -131,10 +131,68 @@ impl FilterPlugin for EqualFilter {
         "eq"
     }
     
-    fn apply(&self, metric: &Metric) -> bool {
+    fn apply(&self, metric: &Metric) -> bool { // Updated signature
         metric.value == self.value
     }
     
+    fn clone_box(&self) -> Box<dyn FilterPlugin> {
+        Box::new(self.clone())
+    }
+}
+
+// ----- Label-Specific Filter Implementations -----
+
+#[derive(Clone)]
+pub struct LabelFilter {
+    label: String,
+}
+
+impl LabelFilter {
+    pub fn new(label: String) -> Self {
+        Self { label }
+    }
+}
+
+impl FilterPlugin for LabelFilter {
+    fn name(&self) -> &str {
+        "label_eq" // Use a different name than the Python one
+    }
+
+    fn apply(&self, metric: &Metric) -> bool {
+        match &metric.label {
+            Some(l) => l == &self.label,
+            None => false, // Don't include unlabeled metrics
+        }
+    }
+
+    fn clone_box(&self) -> Box<dyn FilterPlugin> {
+        Box::new(self.clone())
+    }
+}
+
+// Example: Filter for metrics where the label is in a given set
+#[derive(Clone)]
+pub struct LabelInFilter {
+    labels: Vec<String>,
+}
+
+impl LabelInFilter {
+    pub fn new(labels: Vec<String>) -> Self {
+        Self { labels }
+    }
+}
+
+impl FilterPlugin for LabelInFilter{
+    fn name(&self) -> &str {
+        "label_in"
+    }
+
+    fn apply(&self, metric: &Metric) -> bool {
+        match &metric.label {
+            Some(l) => self.labels.contains(l),
+            None => false
+        }
+    }
     fn clone_box(&self) -> Box<dyn FilterPlugin> {
         Box::new(self.clone())
     }
@@ -359,6 +417,26 @@ pub fn create_time_grouping(grouping_type: &str) -> MetricQueryResult<Box<dyn Ti
     }
 }
 
+/// Create a label filter from type and value
+pub fn create_label_filter(filter_type: &str, label: String) -> MetricQueryResult<Box<dyn FilterPlugin>> {
+    match filter_type {
+        "label_eq" => Ok(Box::new(LabelFilter::new(label))),
+        _ => Err(MetricQueryError::InvalidFilter {
+            reason: format!("Unknown label filter type: {}", filter_type),
+        }),
+    }
+}
+
+/// Create a label_in filter
+pub fn create_label_in_filter(filter_type: &str, labels: Vec<String>) -> MetricQueryResult<Box<dyn FilterPlugin>> {
+    match filter_type {
+        "label_in" => Ok(Box::new(LabelInFilter::new(labels))),
+        _ => Err(MetricQueryError::InvalidFilter {
+            reason: format!("Unknown label filter type: {}", filter_type),
+        }),
+    }
+}
+
 /// Initialize the global plugin registry with built-in plugins
 pub fn init_registry() {
     with_registry_mut(|registry| {
@@ -368,6 +446,8 @@ pub fn init_registry() {
         registry.register_filter(Box::new(GreaterThanOrEqualFilter::new(0)));
         registry.register_filter(Box::new(LessThanOrEqualFilter::new(0)));
         registry.register_filter(Box::new(EqualFilter::new(0)));
+        registry.register_filter(Box::new(LabelFilter::new("".to_string())));
+        registry.register_filter(Box::new(LabelInFilter::new(vec![])));
         
         // Register aggregations
         registry.register_aggregation(Box::new(SumAggregation));
@@ -403,6 +483,22 @@ pub fn py_create_aggregation(agg_type: &str) -> PyResult<String> {
 pub fn py_create_time_grouping(grouping_type: &str) -> PyResult<String> {
     match create_time_grouping(grouping_type) {
         Ok(group) => Ok(group.name().to_string()),
+        Err(e) => Err(pyo3::exceptions::PyValueError::new_err(format!("{:?}", e))),
+    }
+}
+
+#[pyfunction]
+pub fn py_create_label_filter(filter_type: &str, label: String) -> PyResult<String> {
+    match create_label_filter(filter_type, label) {
+        Ok(filter) => Ok(filter.name().to_string()),
+        Err(e) => Err(pyo3::exceptions::PyValueError::new_err(format!("{:?}", e))),
+    }
+}
+
+#[pyfunction]
+pub fn py_create_label_in_filter(filter_type: &str, labels: Vec<String>) -> PyResult<String> {
+    match create_label_in_filter(filter_type, labels) {
+        Ok(filter) => Ok(filter.name().to_string()),
         Err(e) => Err(pyo3::exceptions::PyValueError::new_err(format!("{:?}", e))),
     }
 }

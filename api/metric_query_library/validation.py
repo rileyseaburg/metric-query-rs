@@ -9,7 +9,7 @@ from typing import List, Dict, Any, Optional, Tuple, Union
 from datetime import datetime
 from .type_defs import (
     FilterSpec, TransformationSpec, MetricDict, LabeledMetricDict,
-    FilterType, AggregationType, TimeGroupingType
+    FilterType, AggregationType, TimeGroupingType, LabelFilterType
 )
 
 # Valid filter types
@@ -20,6 +20,9 @@ VALID_AGGREGATION_TYPES = {'sum', 'avg', 'min', 'max'}
 
 # Valid time grouping types
 VALID_TIME_GROUPING_TYPES = {'hour', 'minute', 'day'}
+
+# Valid label filter types
+VALID_LABEL_FILTER_TYPES = {'label_eq', 'label_in'}
 
 # Linux epoch timestamp
 LINUX_EPOCH = datetime(1970, 1, 1).timestamp()
@@ -156,6 +159,42 @@ def validate_time_grouping(time_grouping: str) -> Tuple[bool, Optional[str]]:
     
     return True, None
 
+def validate_label_filter(label_filter_type: str, label_value: Union[str, List[str]]) -> Tuple[bool, Optional[str]]:
+    """
+    Validate label filter type and value
+    
+    Args:
+        label_filter_type: Label filter type string
+        label_value: Label value (string or list of strings)
+        
+    Returns:
+        Tuple of (is_valid, error_message)
+    """
+    if not label_filter_type:
+        return False, "Empty label filter type"
+    
+    if label_filter_type not in VALID_LABEL_FILTER_TYPES:
+        return False, f"Invalid label filter type. Expected one of: {', '.join(VALID_LABEL_FILTER_TYPES)}"
+    
+    # For label_eq, value must be a string
+    if label_filter_type == 'label_eq':
+        if not isinstance(label_value, str):
+            return False, "Label value must be a string for label_eq filter"
+        if not label_value.strip():
+            return False, "Label value cannot be empty"
+    
+    # For label_in, value must be a list of strings
+    elif label_filter_type == 'label_in':
+        if not isinstance(label_value, list):
+            return False, "Label value must be a list of strings for label_in filter"
+        if not label_value:
+            return False, "Label value list cannot be empty"
+        for label in label_value:
+            if not isinstance(label, str) or not label.strip():
+                return False, "All labels in the list must be non-empty strings"
+    
+    return True, None
+
 def validate_transformation(transform_data: Dict[str, Any]) -> Tuple[bool, Optional[str]]:
     """
     Validate transformation data
@@ -195,8 +234,19 @@ def validate_transformation(transform_data: Dict[str, Any]) -> Tuple[bool, Optio
     # Validate label filter if provided
     if 'label_filter' in transform_data:
         label_filter = transform_data['label_filter']
-        if not isinstance(label_filter, str) or not label_filter.strip():
-            return False, "Label filter must be a non-empty string"
+        
+        # Single label string (label_eq filter)
+        if isinstance(label_filter, str):
+            is_valid, error = validate_label_filter('label_eq', label_filter)
+            if not is_valid:
+                return False, f"Invalid label filter: {error}"
+        # List of labels (label_in filter)
+        elif isinstance(label_filter, list):
+            is_valid, error = validate_label_filter('label_in', label_filter)
+            if not is_valid:
+                return False, f"Invalid label filter: {error}"
+        else:
+            return False, "Label filter must be a string or list of strings"
     
     # Check if time grouping is provided without aggregation
     if 'time_grouping' in transform_data and 'aggregation' not in transform_data:

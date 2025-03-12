@@ -14,7 +14,8 @@ use plugins::{TransformationRegistry};
 use transformations::MetricPipeline;
 use plugin_impls::{
     init_registry,
-    py_create_filter, py_create_aggregation, py_create_time_grouping
+    py_create_filter, py_create_aggregation, py_create_time_grouping,
+    py_create_label_filter, py_create_label_in_filter
 };
 use pyo3::prelude::*;
 
@@ -247,6 +248,8 @@ fn metric_query_library(_py: Python, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_create_filter, m)?)?;
     m.add_function(wrap_pyfunction!(py_create_aggregation, m)?)?;
     m.add_function(wrap_pyfunction!(py_create_time_grouping, m)?)?;
+    m.add_function(wrap_pyfunction!(py_create_label_filter, m)?)?;
+    m.add_function(wrap_pyfunction!(py_create_label_in_filter, m)?)?;
     
     Ok(())
 }

@@ -15,14 +15,16 @@ pub struct Metric {
     /// The time at which the metric was collected.
     #[pyo3(get, set)]
     pub timestamp: i64,
+    #[pyo3(get, set)]
+    pub label: Option<String>, // Add optional label
 }
 
 #[pymethods]
 impl Metric {
     /// Create a new Metric
     #[new]
-    pub fn new(value: i64, timestamp: i64) -> Self {
-        Self { value, timestamp }
+    pub fn new(value: i64, timestamp: i64, label: Option<String>) -> Self {
+        Self { value, timestamp, label }
     }
 }
 

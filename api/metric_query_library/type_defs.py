@@ -16,6 +16,9 @@ AggregationType = Literal['sum', 'avg', 'min', 'max']
 # Time grouping type literals
 TimeGroupingType = Literal['hour', 'minute', 'day']
 
+# Label filter type literals
+LabelFilterType = Literal['label_eq', 'label_in']
+
 class FilterSpec(TypedDict):
     """Filter specification for metric queries"""
     type: FilterType
@@ -29,7 +32,7 @@ class TransformationSpec(TypedDict, total=False):
     filter: Optional[FilterSpec]
     aggregation: Optional[AggregationType]
     time_grouping: Optional[TimeGroupingType]
-    label_filter: Optional[str]
+    label_filter: Optional[Union[str, List[str]]]  # Can be a single label or list of labels
 
 class MetricDict(TypedDict):
     """Dictionary representation of a Metric"""

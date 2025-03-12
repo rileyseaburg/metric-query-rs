@@ -9,7 +9,7 @@ pub trait FilterPlugin: Send + Sync {
     fn name(&self) -> &str;
     
     /// Apply the filter to a metric
-    fn apply(&self, metric: &Metric) -> bool;
+    fn apply(&self, metric: &Metric) -> bool; // Update parameter type
     
     /// Clone the plugin (required for trait objects)
     fn clone_box(&self) -> Box<dyn FilterPlugin>;

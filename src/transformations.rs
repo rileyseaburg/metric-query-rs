@@ -70,7 +70,9 @@ impl TransformationStrategy for AggregationTransformation {
         
         // Use with_capacity for optimal memory allocation
         let mut result = Vec::with_capacity(1);
-        result.push(Metric { value, timestamp });
+        // Preserve label if present in first metric
+        let label = metrics[0].label.clone();
+        result.push(Metric { value, timestamp, label });
         
         Ok(result)
     }
@@ -117,11 +119,12 @@ impl TransformationStrategy for TimeGroupingTransformation {
             // Create temporary metrics for the aggregation
             let group_metrics: Vec<Metric> = values
                 .into_iter()
-                .map(|value| Metric { value, timestamp: 0 }) // Timestamp doesn't matter for aggregation
+                .map(|value| Metric { value, timestamp: 0, label: None }) // Timestamp doesn't matter for aggregation
                 .collect();
             
             let value = self.aggregation.apply(&group_metrics)?;
-            result.push(Metric { value, timestamp });
+            // For grouped metrics, we don't have a meaningful label to preserve
+            result.push(Metric { value, timestamp, label: None });
         }
         
         Ok(result)
@@ -205,6 +208,36 @@ impl MetricPipeline {
             )));
             
             Ok(())
+        })
+    }
+    
+    /// Add a label filter transformation to the pipeline
+    pub fn filter_by_label(&mut self, _py: Python<'_>, filter_type: &str, label: String) -> PyResult<()> {
+        with_registry(|registry| {
+            // Find the filter
+            if let Some(filter) = registry.get_filter(filter_type) {
+                self.strategies.push(Box::new(FilterTransformation::new(filter.clone())));
+                Ok(())
+            } else {
+                Err(pyo3::exceptions::PyValueError::new_err(
+                    format!("Unknown label filter type: {}", filter_type)
+                ))
+            }
+        })
+    }
+    
+    /// Add a label inclusion filter transformation to the pipeline
+    pub fn filter_by_labels(&mut self, _py: Python<'_>, filter_type: &str, labels: Vec<String>) -> PyResult<()> {
+        with_registry(|registry| {
+            // Find the filter
+            if let Some(filter) = registry.get_filter(filter_type) {
+                self.strategies.push(Box::new(FilterTransformation::new(filter.clone())));
+                Ok(())
+            } else {
+                Err(pyo3::exceptions::PyValueError::new_err(
+                    format!("Unknown label filter type: {}", filter_type)
+                ))
+            }
         })
     }
     

@@ -88,6 +88,7 @@ If you don't have Docker installed, you can run the components separately:
 - **Time Groupings**: HOUR, MINUTE, DAY
 - **Pipeline API**: Fluent interface for chaining transformations
 - **Plugin Architecture**: Extensible design for custom transformations
+- **Integrated Label Handling**: Direct filtering by label within the transformation pipeline
 
 ## Deployment Options
 
@@ -252,11 +253,15 @@ The application is designed for high performance:
 - Optimized algorithms for time-series transformations
 - Containerized deployment for scalability
 - Independent scaling of UI and API components
-
 ## Learn More
 
 For more details about the API endpoints, see the Swagger documentation available at:
 - Local: http://localhost:5000/apidocs/
 - Production API: https://api-metrics-demandbase.rileyseaburg.com
 - Production UI: https://metrics-demandbase.rileyseaburg.com
+- Production API Swagger: https://api-metrics-demandbase.rileyseaburg.com/apidocs/
+
+## Additional Documentation
+
+- [Integrated Label Handling](api/docs/integrated-label-handling.md) - Learn about the new label-aware transformation capabilities
 - Production API Swagger: https://api-metrics-demandbase.rileyseaburg.com/apidocs/

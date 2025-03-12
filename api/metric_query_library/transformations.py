@@ -14,7 +14,7 @@ from . import (
 )
 from .type_defs import (
     FilterSpec, TransformationSpec, MetricDict, LabeledMetricDict,
-    FilterType, AggregationType, TimeGroupingType
+    FilterType, AggregationType, TimeGroupingType, LabelFilterType
 )
 from .validation import (
     validate_filter, validate_aggregation, validate_time_grouping
@@ -49,9 +49,12 @@ class MetricTransformationPipeline:
         self._metrics = []
         for metric in metrics:
             if isinstance(metric, dict):
+                # Check if we have a label
+                label = metric.get('label')
                 self._metrics.append(Metric(
                     value=int(metric['value']),
-                    timestamp=int(metric.get('timestamp', 0))
+                    timestamp=int(metric.get('timestamp', 0)),
+                    label=label
                 ))
             else:
                 self._metrics.append(metric)
@@ -111,6 +114,36 @@ class MetricTransformationPipeline:
     def equal_to(self, value: int) -> 'MetricTransformationPipeline':
         """Add an equality filter"""
         return self.filter('eq', value)
+        
+    def filter_by_label(self, label: str) -> 'MetricTransformationPipeline':
+        """
+        Add a label equality filter to the pipeline.
+        
+        Args:
+            label: Label to match
+            
+        Returns:
+            Self for method chaining
+        """
+        # Use the new label_eq filter type
+        registry = get_registry()
+        self._pipeline.filter_by_label("label_eq", label)
+        return self
+        
+    def filter_by_labels(self, labels: List[str]) -> 'MetricTransformationPipeline':
+        """
+        Add a label inclusion filter to the pipeline.
+        
+        Args:
+            labels: List of labels to match
+            
+        Returns:
+            Self for method chaining
+        """
+        # Use the new label_in filter type
+        registry = get_registry()
+        self._pipeline.filter_by_labels("label_in", labels)
+        return self
         
     def aggregate(self, type: AggregationType) -> 'MetricTransformationPipeline':
         """
@@ -199,15 +232,22 @@ class MetricTransformationPipeline:
         """
         return self._pipeline.execute()
     
-    def execute_to_dicts(self) -> List[MetricDict]:
+    def execute_to_dicts(self) -> List[Union[MetricDict, LabeledMetricDict]]:
         """
         Execute the pipeline and return the results as dictionaries.
         
         Returns:
-            List of dictionaries with value and timestamp
+            List of dictionaries with value, timestamp, and optional label
         """
         results = self.execute()
-        return [{'value': metric.value, 'timestamp': metric.timestamp} for metric in results]
+        return [
+            {
+                'value': metric.value,
+                'timestamp': metric.timestamp,
+                **({"label": metric.label} if metric.label is not None else {})
+            }
+            for metric in results
+        ]
 
 
 class LegacyTransformationBuilder:
@@ -270,9 +310,11 @@ def transform_metrics(
     metric_objs = []
     for metric in metrics:
         if isinstance(metric, dict):
+            label = metric.get('label')
             metric_objs.append(Metric(
                 value=int(metric['value']),
-                timestamp=int(metric.get('timestamp', 0))
+                timestamp=int(metric.get('timestamp', 0)),
+                label=label
             ))
         else:
             metric_objs.append(metric)
@@ -298,10 +340,17 @@ def transform_metrics_to_dicts(
         transformations: List of transformation specifications
         
     Returns:
-        List of dictionaries with value and timestamp
+        List of dictionaries with value, timestamp, and optional label
     """
     results = transform_metrics(metrics, transformations)
-    return [{'value': metric.value, 'timestamp': metric.timestamp} for metric in results]
+    return [
+        {
+            'value': metric.value,
+            'timestamp': metric.timestamp,
+            **({"label": metric.label} if metric.label is not None else {})
+        }
+        for metric in results
+    ]
 
 
 def create_pipeline(metrics: List[Union[Metric, Dict[str, Any]]]) -> MetricTransformationPipeline:
