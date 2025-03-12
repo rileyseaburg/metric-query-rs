@@ -20,12 +20,20 @@ spec:
         app: {{ .Values.api.name }}
         release: "{{ .Release.Name }}"
     spec:
+      volumes:
+        - name: test-data-volume
+          configMap:
+            name: metrics-test-data
       containers:
         - name: {{ .Values.api.name }}
           image: "{{ .Values.api.image.repository }}:{{ .Values.api.image.tag }}"
           imagePullPolicy: {{ .Values.api.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.api.service.targetPort }}
+          volumeMounts:
+            - name: test-data-volume
+              mountPath: /app/test_data.json
+              subPath: test_data.json
           resources:
             limits:
               cpu: {{ .Values.api.resources.limits.cpu }}
